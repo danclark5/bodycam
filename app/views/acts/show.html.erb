@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Who:</strong>
+  <%= @act.who %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @act.title %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @act.link %>
+</p>
+
+<p>
+  <strong>When:</strong>
+  <%= @act.when %>
+</p>
+
+<%= link_to 'Edit', edit_act_path(@act) %> |
+<%= link_to 'Back', acts_path %>
