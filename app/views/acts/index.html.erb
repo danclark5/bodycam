@@ -1,19 +1,20 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Acts</h1>
-
 <% @acts.each do |act| %>
   <div>
-    <h1><%= act.who %></h1>
-    <h2><%= act.title %></h2>
+    <h1 class="title is-2"><%= act.who %></h1>
+    <h2 class="title is-3"><%= act.title %></h2>
     <td></td>
     <iframe width="560" height="315" src="<%= act.link %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <%= link_to 'Show', act %>
-    <%= link_to 'Edit', edit_act_path(act) %>
-    <%= link_to 'Destroy', act, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if is_bruised_thumb?%>
+      <%= link_to 'Show', act %>
+      <%= link_to 'Edit', edit_act_path(act) %>
+      <%= link_to 'Destroy', act, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
+<br>
 <% end %>
 
 <br>
 
-<%= link_to 'New Act', new_act_path %>
+<% if is_bruised_thumb?%>
+  <%= link_to 'New Act', new_act_path %>
+<% end %>

@@ -10,6 +10,38 @@
   </head>
 
   <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <h1 class="title">BodyCam</h1>
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarItems">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <% if is_bruised_thumb?%>
+            <div class="buttons">
+              <%= link_to "Log out", log_out_path, class: "button is-light" %>
+            </div>
+          <% else %>
+            <div class="buttons">
+              <%= link_to "Log in", log_in_path, class: "button is-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+
+
     <%= yield %>
   </body>
 </html>
