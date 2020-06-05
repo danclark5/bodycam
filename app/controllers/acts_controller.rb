@@ -75,7 +75,7 @@ class ActsController < ApplicationController
     end
 
     def page
-      return (params[:page].to_i - 1) * 2 if params.include? :page
+      return (params[:page].to_i - 1) * 20 if params.include? :page
       return 0
     end
 end
