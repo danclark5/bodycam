@@ -4,7 +4,9 @@ class ActsController < ApplicationController
   # GET /acts
   # GET /acts.json
   def index
-    @acts = Act.all
+    @acts = Act.order(when: :desc).limit(20).offset(page)
+    @page = (params[:page] || 1).to_i
+    @max_page = (Act.count + 19) / 20
   end
 
   # GET /acts/1
@@ -70,5 +72,10 @@ class ActsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def act_params
       params.require(:act).permit(:who, :title, :link, :when)
+    end
+
+    def page
+      return (params[:page].to_i - 1) * 2 if params.include? :page
+      return 1
     end
 end

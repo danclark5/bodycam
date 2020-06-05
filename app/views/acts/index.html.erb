@@ -2,12 +2,18 @@
     <strong> Warning: </strong> This site contains graphic material. While we feel it's important to air out these acts it is also important to take time to reflect and heal. <strong>Be safe!</strong>
   </div>
 
+  <div class="notification is-info">
+    <p> "Why are people rioting over one bad act" is something uttered by the uninformed. If you have been directed to this site someone is trying to help you inform yourself. This site contains documented acts where police officers have abused their power and overreached their authority. Below you'll find names of the victims, what happened, and associated media.<br/><br/>
+    It's a damn shame that this site even exists, but welcome to America.</p>
+  </div>
+
 <% @acts.each do |act| %>
   <div>
     <h1 class="title is-2"><%= act.who %></h1>
     <h2 class="title is-3"><%= act.title %></h2>
     <td></td>
     <iframe width="560" height="315" src="<%= act.link %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
     <% if is_bruised_thumb?%>
       <%= link_to 'Show', act %>
       <%= link_to 'Edit', edit_act_path(act) %>
@@ -22,3 +28,50 @@
 <% if is_bruised_thumb?%>
   <%= link_to 'New Act', new_act_path %>
 <% end %>
+
+
+
+<nav class="pagination" role="navigation" aria-label="pagination">
+  <% if @page > 1 %>
+    <%= link_to "Previous page", acts_path(page: @page - 1 ), class: "pagination-previous", 'aria-label': "Goto previous page"%>
+  <% end %>
+  <% if @page < @max_page %>
+    <%= link_to "Next page", acts_path(page: @page + 1 ), class: "pagination-next", 'aria-label': "Goto next page"%>
+  <% end %>
+
+  <ul class="pagination-list">
+    <% if @page != 1 %>
+      <li>
+        <%= link_to '1', acts_path(page: 1), class: "pagination-link", 'aria-label': 'Goto page 1'%>
+      </li>
+    <% end %>
+    <% if @page > 3 %>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <% end %>
+    <% if @page > 2 %>
+      <li>
+        <%= link_to @page - 1, acts_path(page: @page - 1 ), class: "pagination-link", 'aria-label': "Goto page #{@page - 1}"%>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to @page, acts_path(page: @page ), class: "pagination-link is-current", 'aria-label': "Page #{@page}"%>
+    </li>
+    <% if @max_page > @page %>
+    <li>
+      <%= link_to @page + 1, acts_path(page: @page + 1 ), class: "pagination-link", 'aria-label': "Goto page #{@page + 1}"%>
+    </li>
+    <% end %>
+    <% if @max_page > @page+2 %>
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    <% end %>
+    <% if @max_page > @page+1 %>
+    <li>
+      <%= link_to @max_page, acts_path(page: @max_page ), class: "pagination-link", 'aria-label': "Goto page #{@max_page}"%>
+    </li>
+    <% end %>
+  </ul>
+</nav>
