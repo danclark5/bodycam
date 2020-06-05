@@ -1,4 +1,5 @@
 class ActsController < ApplicationController
+  before_action :require_bruised_thumb, only: [:new, :create, :edit, :update]
   before_action :set_act, only: [:show, :edit, :update, :destroy]
 
   # GET /acts
